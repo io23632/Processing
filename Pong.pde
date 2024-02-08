@@ -31,7 +31,7 @@ fill(#FCFCFC);
 text("Score    " + Score, width/2, 50);
 
 // The ball
-ellipse(x, y, diam, diam);
+circle(x, y, diam);
 // Left side of screen
 rect(0, 0, 20, height);
 // Rectangle that follows mousemovement()
