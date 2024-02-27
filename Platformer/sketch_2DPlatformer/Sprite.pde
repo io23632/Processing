@@ -21,6 +21,22 @@ public Sprite(String filename, float scale) {
  // Using this, I am calling the first constrocter insdie this second constructer, where centerX and centerY are 0;
 this(filename, scale, 0, 0);
 }
+
+
+
+public Sprite(PImage img, float scale){
+this.img = img; 
+w = img.width * scale;
+h = img.height * scale;
+centerX = 0;
+centerY = 0;
+changeX = 0;
+changeY = 0;
+
+}
+
+
+
 // Method to display image: 
 public void display() {
   image(img, centerX, centerY, w, h);
@@ -33,5 +49,9 @@ public void update(float changeX, float changeY) {
   centerX += changeX;
   centerY += changeY;
   }
+  
+  
+  
+  
   
 }
