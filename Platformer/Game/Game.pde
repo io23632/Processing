@@ -14,9 +14,16 @@ Sprite player;
 PImage snow, crate, red_brick, brown_brick;
 ArrayList<Sprite> platforms;
 
+
+float view_x;
+float view_y;
+
+
+
+
 //initialize them in setup().
 void setup(){
-  size(800, 600);
+  size(900, 600);
   imageMode(CENTER);
   player = new Sprite("data/Platformer1.png", 0.6);
   
@@ -25,19 +32,18 @@ void setup(){
 
   platforms = new ArrayList<Sprite>();
  
- 
   red_brick = loadImage("data/red_brick.png");
   brown_brick = loadImage("data/brown_brick.png");
   crate = loadImage("data/crate.png");
   snow = loadImage("data/snow.png");
   createPlatforms("data/map.csv");
   
-  
 }
 
 // modify and update them in draw().
 void draw(){
   background(255);
+  scroll();
   
   player.display();
   resolvePlatformCollisions(player, platforms);
@@ -45,6 +51,30 @@ void draw(){
     s.display();
 
 } 
+
+void scroll() {
+  
+float right_boundary = view_x + width - RIGHT_MARGIN;
+if (player.getRight() > right_boundary) {
+    view_x += player.getRight() - right_boundary;
+  }
+
+float left_boundary = view_x + LEFT_MARGIN;
+if (player.getLeft() < left_boundary) {
+    view_x -= left_boundary - player.getLeft();
+  }
+
+float bottom_boundary = view_y + height - VERTICAL_MARGIN;
+if(player.getBottom() > bottom_boundary) {
+    view_y += player.getBottom() - bottom_boundary;
+  }
+  
+float top_boundary = view_y + VERTICAL_MARGIN;
+if(player.getTop() < top_boundary){
+    view_y -= top_boundary - player.getTop();
+  }
+  translate(-view_x, -view_y);
+}
 
 // returns true if sprite is one a platform.
 public boolean isOnPlatforms(Sprite s, ArrayList<Sprite> walls){
