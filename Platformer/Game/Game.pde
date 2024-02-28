@@ -8,18 +8,23 @@ final static float RIGHT_MARGIN = 400;
 final static float LEFT_MARGIN = 60;
 final static float VERTICAL_MARGIN = 40;
 
+final static int NEUTRAL_FACING = 0;
+final static int RIGHT_FACING = 1;
+final static int LEFT_FACING = 2;
+
+
+
 
 //declare global variables
 Sprite player;
-PImage snow, crate, red_brick, brown_brick;
+PImage snow, crate, red_brick, brown_brick, gold;
 ArrayList<Sprite> platforms;
+ArrayList<Sprite> coins;
+
 
 
 float view_x;
 float view_y;
-
-
-
 
 //initialize them in setup().
 void setup(){
@@ -31,7 +36,12 @@ void setup(){
   player.center_y = 100;
 
   platforms = new ArrayList<Sprite>();
+  coins = new ArrayList<Sprite>();
+   
  
+ 
+ 
+  gold = loadImage("coinImages/gold1.png");
   red_brick = loadImage("data/red_brick.png");
   brown_brick = loadImage("data/brown_brick.png");
   crate = loadImage("data/crate.png");
@@ -47,9 +57,13 @@ void draw(){
   
   player.display();
   resolvePlatformCollisions(player, platforms);
-  for(Sprite s: platforms)
+  for(Sprite s: platforms) {
     s.display();
-
+  }
+    for(Sprite c: coins) {
+    c.display();
+    ((AnimatedSprite)c).updateAnimation();
+    }
 } 
 
 void scroll() {
@@ -205,6 +219,13 @@ void createPlatforms(String filename){
         s.center_y = SPRITE_SIZE/2 + row * SPRITE_SIZE;
         platforms.add(s);
       }
+      else if(values[col].equals("5")){
+        Coin c = new Coin(gold, SPRITE_SCALE);
+        c.center_x = SPRITE_SIZE/2 + col * SPRITE_SIZE;
+        c.center_y = SPRITE_SIZE/2 + row * SPRITE_SIZE;
+        coins.add(c);
+      }
+      
     }
   }
 }
