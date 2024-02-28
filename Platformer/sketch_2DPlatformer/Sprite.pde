@@ -35,8 +35,6 @@ changeY = 0;
 
 }
 
-
-
 // Method to display image: 
 public void display() {
   image(img, centerX, centerY, w, h);
@@ -50,8 +48,33 @@ public void update(float changeX, float changeY) {
   centerY += changeY;
   }
   
-  
-  
-  
-  
+
+void setLeft(float newleft) {
+  centerX = newleft + w/2;
+}
+float getLeft(){
+return centerX - w/2;
+}
+
+void setRight(float newright){
+centerX = newright - w/2;
+}
+float getRight(){
+return centerX + w/2;
+}
+
+void setTop(float newtop){
+centerY = newtop + h/2;
+}
+float getTop(){
+return centerY - h/2;
+}
+
+void setBottom(float newbottom){
+centerY = newbottom - h/2;
+}
+float getBottom(){
+return centerY + h/2;
+}
+   
 }
