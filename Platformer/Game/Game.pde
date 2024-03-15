@@ -17,11 +17,11 @@ final static int LEFT_FACING = 2;
 
 //declare global variables
 Sprite player;
-PImage snow, crate, red_brick, brown_brick, gold;
+PImage snow, crate, red_brick, brown_brick, gold, spider;
 ArrayList<Sprite> platforms;
 ArrayList<Sprite> coins;
 
-
+ Enemy enemy;
 
 float view_x;
 float view_y;
@@ -38,9 +38,9 @@ void setup(){
   platforms = new ArrayList<Sprite>();
   coins = new ArrayList<Sprite>();
    
+
  
- 
- 
+  spider = loadImage("/Users/shahidaaslam/Desktop/Hamza/Processing/Platformer/Game/data/Platformer1.png");
   gold = loadImage("coinImages/gold1.png");
   red_brick = loadImage("data/red_brick.png");
   brown_brick = loadImage("data/brown_brick.png");
@@ -64,6 +64,7 @@ void draw(){
     c.display();
     ((AnimatedSprite)c).updateAnimation();
     }
+    enemy.display();
 } 
 
 void scroll() {
@@ -224,6 +225,11 @@ void createPlatforms(String filename){
         c.center_x = SPRITE_SIZE/2 + col * SPRITE_SIZE;
         c.center_y = SPRITE_SIZE/2 + row * SPRITE_SIZE;
         coins.add(c);
+      }
+      else if (values[col].equals("6")){
+      enemy = new Enemy(spider, SPRITE_SCALE);
+      enemy.center_x = SPRITE_SIZE/2 + col * SPRITE_SIZE;
+      enemy.center_y = SPRITE_SIZE/2 + row * SPRITE_SIZE;
       }
       
     }
